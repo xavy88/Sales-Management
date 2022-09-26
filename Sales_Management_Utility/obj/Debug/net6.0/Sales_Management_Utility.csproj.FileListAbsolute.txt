@@ -1,0 +1,12 @@
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\bin\Debug\net6.0\Sales_Management_Utility.deps.json
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\bin\Debug\net6.0\Sales_Management_Utility.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\bin\Debug\net6.0\Sales_Management_Utility.pdb
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.csproj.AssemblyReference.cache
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.AssemblyInfoInputs.cache
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.AssemblyInfo.cs
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.csproj.CoreCompileInputs.cache
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\refint\Sales_Management_Utility.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\Sales_Management_Utility.pdb
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Utility\obj\Debug\net6.0\ref\Sales_Management_Utility.dll
