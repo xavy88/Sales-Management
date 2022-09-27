@@ -1,9 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Sales_Management_API.Data;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<ApplicationDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 Log.Logger = new LoggerConfiguration().MinimumLevel.Error()
     .WriteTo.File("log/Sales_Management.txt",rollingInterval:RollingInterval.Day).CreateLogger();
 
