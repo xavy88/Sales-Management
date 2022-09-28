@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Sales_Management_API;
 using Sales_Management_API.Data;
 using Serilog;
 
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Error()
     .WriteTo.File("log/Sales_Management.txt",rollingInterval:RollingInterval.Day).CreateLogger();
 
