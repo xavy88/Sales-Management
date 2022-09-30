@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Error()
     .WriteTo.File("log/Sales_Management.txt",rollingInterval:RollingInterval.Day).CreateLogger();
