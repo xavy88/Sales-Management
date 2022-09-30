@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Sales_Management_API.Data;
 using Sales_Management_API.Model;
 using Sales_Management_API.Model.DTO;
+using Sales_Management_API.Repository.IRepository;
+using System.Net;
 
 namespace Sales_Management_API.Controllers
 {
@@ -12,104 +14,172 @@ namespace Sales_Management_API.Controllers
     [ApiController]
     public class DepartmentAPIController : ControllerBase
     {
+        protected APIResponse _response;
         private readonly ILogger<DepartmentAPIController> _logger;
-        private readonly ApplicationDbContext _db;
+        private readonly IDepartmentRepository _dbDepartment;
         private readonly IMapper _mapper;
 
-        public DepartmentAPIController(ILogger<DepartmentAPIController> logger, ApplicationDbContext db, IMapper mapper)
+        public DepartmentAPIController(ILogger<DepartmentAPIController> logger, IDepartmentRepository dbDepartment, IMapper mapper)
         {
             _logger = logger;
-            _db = db;
+            _dbDepartment = dbDepartment;
             _mapper = mapper;
+            this._response = new();
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<DepartmentDTO>>> GetDepartments()
+        public async Task<ActionResult<APIResponse>> GetDepartments()
         {
-            IEnumerable<Department> departmentList = await _db.Departments.ToListAsync();
-            return Ok(_mapper.Map<List<DepartmentDTO>>(departmentList));
+            try
+            {
+                IEnumerable<Department> departmentList = await _dbDepartment.GetAllAsync();
+                _response.Result = _mapper.Map<List<DepartmentDTO>>(departmentList);
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+
+            }
+            return _response;
         }
-       
-        [HttpGet("{id:int}",Name ="GetDepartment")]
+
+        [HttpGet("{id:int}", Name = "GetDepartment")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<DepartmentDTO>> GetDepartment(int id)
+        public async Task<ActionResult<APIResponse>> GetDepartment(int id)
         {
-            if (id == 0)
+            try
             {
-                return BadRequest();
-            }
-            var department = await _db.Departments.FirstOrDefaultAsync(x => x.Id == id);
-            if (department == null)
-            {
-                return NotFound();
-            }
+                if (id == 0)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
+                var department = await _dbDepartment.GetAsync(x => x.Id == id);
+                if (department == null)
+                {
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
 
-            return Ok(_mapper.Map<DepartmentDTO>(department));
+                _response.Result = _mapper.Map<DepartmentDTO>(department);
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+
+            }
+            return _response;
+
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<DepartmentDTO>> CreateDeparment([FromBody] DepartmentCreateDTO createDTO)
+        public async Task<ActionResult<APIResponse>> CreateDeparment([FromBody] DepartmentCreateDTO createDTO)
         {
-            if ( await _db.Departments.FirstOrDefaultAsync(x=>x.Name.ToLower() == createDTO.Name.ToLower())!=null)
+            try
             {
-                ModelState.AddModelError("ErrorMessage", "Department already exists!");
-                return BadRequest(ModelState);
-            }
-            if (createDTO == null)
-            {
-                ModelState.AddModelError("ErrorMessage", "Error Creating Department!");
-                return BadRequest(createDTO);
-            }
-            Department model = _mapper.Map<Department>(createDTO);
-            
-            await _db.Departments.AddAsync(model);
-            await _db.SaveChangesAsync();
+                if (await _dbDepartment.GetAsync(x => x.Name.ToLower() == createDTO.Name.ToLower()) != null)
+                {
+                    ModelState.AddModelError("ErrorMessage", "Department already exists!");
+                    return BadRequest(ModelState);
+                }
+                if (createDTO == null)
+                {
+                    ModelState.AddModelError("ErrorMessage", "Error Creating Department!");
+                    return BadRequest(createDTO);
+                }
+                Department department = _mapper.Map<Department>(createDTO);
 
-            return CreatedAtRoute("GetDepartment", new { id = model.Id }, model);
+                await _dbDepartment.CreateAsync(department);
+
+                _response.Result = _mapper.Map<DepartmentDTO>(department);
+                _response.StatusCode = HttpStatusCode.Created;
+                return CreatedAtRoute("GetDepartment", new { id = department.Id }, _response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+
+            }
+            return _response;
         }
 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete("{id:int}", Name ="DeleteDepartment")]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        [HttpDelete("{id:int}", Name = "DeleteDepartment")]
+        public async Task<ActionResult<APIResponse>> DeleteDepartment(int id)
         {
-            if (id == 0)
+            try
             {
-                return BadRequest();
+                if (id == 0)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
+                var department = await _dbDepartment.GetAsync(x => x.Id == id);
+                if (department == null)
+                {
+                    ModelState.AddModelError("ErrorMessage", "Error Deleting Department!");
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
+                await _dbDepartment.RemoveAsync(department);
+                _response.StatusCode = HttpStatusCode.NoContent;
+                _response.IsSuccess = true;
+                return Ok(_response);
             }
-            var department = await _db.Departments.FirstOrDefaultAsync(x=>x.Id == id);
-            if (department == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+
             }
-            _db.Departments.Remove(department);
-           await _db.SaveChangesAsync();
-            return NoContent();
+            return _response;
         }
 
-        [HttpPut("{id:int}", Name ="UpdateDepartment")]
+        [HttpPut("{id:int}", Name = "UpdateDepartment")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task <IActionResult> UpdateDepartment(int id, [FromBody] DepartmentUpdateDTO updateDTO)
+        public async Task<ActionResult<APIResponse>> UpdateDepartment(int id, [FromBody] DepartmentUpdateDTO updateDTO)
         {
-            if(updateDTO == null || id != updateDTO.Id)
+            try
             {
-                return BadRequest();
+                if (updateDTO == null || id != updateDTO.Id)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
+                Department model = _mapper.Map<Department>(updateDTO);
+
+                await _dbDepartment.UpdateAsync(model);
+                _response.StatusCode = HttpStatusCode.NoContent;
+                _response.IsSuccess = true;
+                return Ok(_response);
             }
-            Department model = _mapper.Map<Department>(updateDTO);
-           
-            _db.Departments.Update(model);
-            await _db.SaveChangesAsync();
-            return NoContent();
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+
+            }
+            return _response;
 
         }
+
     }
 }

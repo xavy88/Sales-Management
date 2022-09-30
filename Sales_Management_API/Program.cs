@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Sales_Management_API;
 using Sales_Management_API.Data;
+using Sales_Management_API.Repository;
+using Sales_Management_API.Repository.IRepository;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Error()
     .WriteTo.File("log/Sales_Management.txt",rollingInterval:RollingInterval.Day).CreateLogger();
