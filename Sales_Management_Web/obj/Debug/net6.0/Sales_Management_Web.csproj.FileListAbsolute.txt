@@ -24,3 +24,8 @@ C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Ma
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\obj\Debug\net6.0\Sales_Management_Web.pdb
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\obj\Debug\net6.0\Sales_Management_Web.genruntimeconfig.cache
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\obj\Debug\net6.0\ref\Sales_Management_Web.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\Sales_Management_Utility.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\Sales_Management_Utility.pdb
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\obj\Debug\net6.0\Sales_Management_Web.csproj.CopyComplete

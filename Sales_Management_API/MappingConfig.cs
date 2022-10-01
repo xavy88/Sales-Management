@@ -10,15 +10,16 @@ namespace Sales_Management_API
         {
             CreateMap<Department, DepartmentDTO>();
             CreateMap<DepartmentDTO, Department>();
-
             CreateMap<Department, DepartmentCreateDTO>().ReverseMap();
             CreateMap<Department, DepartmentUpdateDTO>().ReverseMap();
 
             CreateMap<Service, ServiceDTO>().ReverseMap();
-
-
             CreateMap<Service, ServiceCreateDTO>().ReverseMap();
             CreateMap<Service, ServiceUpdateDTO>().ReverseMap();
+
+            CreateMap<Employee, EmployeeDTO>().ReverseMap();
+            CreateMap<Employee, EmployeeCreateDTO>().ReverseMap();
+            CreateMap<Employee, EmployeeUpdateDTO>().ReverseMap();
         }
     }
 }

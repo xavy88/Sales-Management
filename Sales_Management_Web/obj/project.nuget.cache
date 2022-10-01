@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "KYA93aRKjKmMsPJmbrAgkSBEqnpKD+QLBvyTW0UFyrq1gXaYYG2aPz7hygsXEKvB1CKZwZp+HNjtn3clbMdGog==",
+  "dgSpecHash": "8og5wLqATb6V2Pb7LHDOLD6pU1yL1wNG+51mbD7L6rc1fepYDhLi9GCfd8YY5PMqvP+H4kxtPgh3j6rPLRKoFQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\matri\\Desktop\\Net Core 2022\\API\\Sales Manager\\Sales Management\\Sales_Management_Web\\Sales_Management_Web.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\matri\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
