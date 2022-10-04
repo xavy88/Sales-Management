@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Error()
     .WriteTo.File("log/Sales_Management.txt",rollingInterval:RollingInterval.Day).CreateLogger();
