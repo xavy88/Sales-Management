@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8og5wLqATb6V2Pb7LHDOLD6pU1yL1wNG+51mbD7L6rc1fepYDhLi9GCfd8YY5PMqvP+H4kxtPgh3j6rPLRKoFQ==",
+  "dgSpecHash": "v1KF5EgPDg18jRR2h9qCFcIQL0+mNE9rhF5SrLWblYMxnfSjdQPi9ecbLZB3AEcQSmyaIGyPuGJqQRN/0D2qkQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\matri\\Desktop\\Net Core 2022\\API\\Sales Manager\\Sales Management\\Sales_Management_Web\\Sales_Management_Web.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\matri\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\matri\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\matri\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

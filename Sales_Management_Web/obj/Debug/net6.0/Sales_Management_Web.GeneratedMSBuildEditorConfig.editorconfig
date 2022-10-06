@@ -15,6 +15,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Department/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Department/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Department/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Department/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

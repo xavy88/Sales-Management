@@ -1,10 +1,17 @@
+using Microsoft.Extensions.DependencyInjection;
 using Sales_Management_Web;
+using Sales_Management_Web.Services;
+using Sales_Management_Web.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+builder.Services.AddHttpClient<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

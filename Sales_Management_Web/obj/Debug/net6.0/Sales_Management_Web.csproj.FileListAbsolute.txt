@@ -29,3 +29,4 @@ C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Ma
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\Sales_Management_Utility.dll
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\Sales_Management_Utility.pdb
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\obj\Debug\net6.0\Sales_Management_Web.csproj.CopyComplete
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_Web\bin\Debug\net6.0\Newtonsoft.Json.dll

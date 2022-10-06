@@ -24,6 +24,10 @@ namespace Sales_Management_API
             CreateMap<Client, ClientDTO>().ReverseMap();
             CreateMap<Client, ClientCreateDTO>().ReverseMap();
             CreateMap<Client, ClientUpdateDTO>().ReverseMap();
+
+            CreateMap<Order, OrderDTO>().ReverseMap(); 
+            CreateMap<Order,OrderCreateDTO>().ReverseMap();
+            CreateMap<Order, OrderUpdateDTO>().ReverseMap();
         }
     }
 }

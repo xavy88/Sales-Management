@@ -12,29 +12,29 @@ namespace Sales_Management_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientAPIController : ControllerBase
+    public class OrderAPIController : ControllerBase
     {
         protected APIResponse _response;
-        private readonly ILogger<ClientAPIController> _logger;
-        private readonly IClientRepository _dbClient;
+        private readonly ILogger<OrderAPIController> _logger;
+        private readonly IOrderRepository _dbOrder;
         private readonly IMapper _mapper;
 
-        public ClientAPIController(ILogger<ClientAPIController> logger, IClientRepository dbClient, IMapper mapper)
+        public OrderAPIController(ILogger<OrderAPIController> logger, IOrderRepository dbOrder, IMapper mapper)
         {
             _logger = logger;
-            _dbClient = dbClient;
+            _dbOrder = dbOrder;
             _mapper = mapper;
             this._response = new();
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<APIResponse>> GetClients()
+        public async Task<ActionResult<APIResponse>> GetOrders()
         {
             try
             {
-                IEnumerable<Client> clientList = await _dbClient.GetAllAsync();
-                _response.Result = _mapper.Map<List<ClientDTO>>(clientList);
+                IEnumerable<Order> orderList = await _dbOrder.GetAllAsync();
+                _response.Result = _mapper.Map<List<OrderDTO>>(orderList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
 
@@ -48,11 +48,11 @@ namespace Sales_Management_API.Controllers
             return _response;
         }
 
-        [HttpGet("{id:int}", Name = "GetClient")]
+        [HttpGet("{id:int}", Name = "GetOrder")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<APIResponse>> GetClient(int id)
+        public async Task<ActionResult<APIResponse>> GetOrder(int id)
         {
             try
             {
@@ -61,14 +61,14 @@ namespace Sales_Management_API.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                var client = await _dbClient.GetAsync(x => x.Id == id);
-                if (client == null)
+                var order = await _dbOrder.GetAsync(x => x.Id == id);
+                if (order == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
 
-                _response.Result = _mapper.Map<ClientDTO>(client);
+                _response.Result = _mapper.Map<OrderDTO>(order);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -86,27 +86,27 @@ namespace Sales_Management_API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateClient([FromBody] ClientCreateDTO createDTO)
+        public async Task<ActionResult<APIResponse>> CreateOrder([FromBody] OrderCreateDTO createDTO)
         {
             try
             {
-                if (await _dbClient.GetAsync(x => x.CompanyName.ToLower() == createDTO.CompanyName.ToLower()) != null)
+                if (await _dbOrder.GetAsync(x => x.Reference.ToLower() == createDTO.Reference.ToLower()) != null)
                 {
-                    ModelState.AddModelError("ErrorMessage", "Client already exists!");
+                    ModelState.AddModelError("ErrorMessage", "Order already exists!");
                     return BadRequest(ModelState);
                 }
                 if (createDTO == null)
                 {
-                    ModelState.AddModelError("ErrorMessage", "Error Creating Client!");
+                    ModelState.AddModelError("ErrorMessage", "Error Creating Order!");
                     return BadRequest(createDTO);
                 }
-                Client client = _mapper.Map<Client>(createDTO);
+                Order order = _mapper.Map<Order>(createDTO);
 
-                await _dbClient.CreateAsync(client);
+                await _dbOrder.CreateAsync(order);
 
-                _response.Result = _mapper.Map<ClientDTO>(client);
+                _response.Result = _mapper.Map<OrderDTO>(order);
                 _response.StatusCode = HttpStatusCode.Created;
-                return CreatedAtRoute("GetClient", new { id = client.Id }, _response);
+                return CreatedAtRoute("GetOrder", new { id = order.Id }, _response);
             }
             catch (Exception ex)
             {
@@ -121,8 +121,8 @@ namespace Sales_Management_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete("{id:int}", Name = "DeleteClient")]
-        public async Task<ActionResult<APIResponse>> DeleteClient(int id)
+        [HttpDelete("{id:int}", Name = "DeleteOrder")]
+        public async Task<ActionResult<APIResponse>> DeleteOrder(int id)
         {
             try
             {
@@ -131,14 +131,14 @@ namespace Sales_Management_API.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                var client = await _dbClient.GetAsync(x => x.Id == id);
-                if (client == null)
+                var order = await _dbOrder.GetAsync(x => x.Id == id);
+                if (order == null)
                 {
-                    ModelState.AddModelError("ErrorMessage", "Error Deleting Client!" + id);
+                    ModelState.AddModelError("ErrorMessage", "Error Deleting Order!" + id);
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
-                await _dbClient.RemoveAsync(client);
+                await _dbOrder.RemoveAsync(order);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -152,11 +152,11 @@ namespace Sales_Management_API.Controllers
             return _response;
         }
 
-        [HttpPut("{id:int}", Name = "UpdateClient")]
+        [HttpPut("{id:int}", Name = "UpdateOrder")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> UpdateClient(int id, [FromBody] ClientUpdateDTO updateDTO)
+        public async Task<ActionResult<APIResponse>> UpdateOrder(int id, [FromBody] OrderUpdateDTO updateDTO)
         {
             try
             {
@@ -165,9 +165,9 @@ namespace Sales_Management_API.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                Client model = _mapper.Map<Client>(updateDTO);
+                Order order = _mapper.Map<Order>(updateDTO);
 
-                await _dbClient.UpdateAsync(model);
+                await _dbOrder.UpdateAsync(order);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
