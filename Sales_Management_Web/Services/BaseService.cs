@@ -3,6 +3,7 @@ using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Models;
 using Sales_Management_Web.Services.IServices;
+using System.Net;
 using System.Text;
 
 namespace Sales_Management_Web.Services
@@ -25,7 +26,7 @@ namespace Sales_Management_Web.Services
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
-                if (apiRequest.Data!=null)
+                if (apiRequest.Data != null)
                 {
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8, "application/json");
@@ -33,7 +34,7 @@ namespace Sales_Management_Web.Services
                 switch (apiRequest.ApiType)
                 {
                     case SD.ApiType.POST:
-                        message.Method=HttpMethod.Post;
+                        message.Method = HttpMethod.Post;
                         break;
                     case SD.ApiType.PUT:
                         message.Method = HttpMethod.Put;
@@ -41,15 +42,34 @@ namespace Sales_Management_Web.Services
                     case SD.ApiType.DELETE:
                         message.Method = HttpMethod.Delete;
                         break;
-                     default:
+                    default:
                         message.Method = HttpMethod.Get;
                         break;
                 }
                 HttpResponseMessage apiResponse = null;
-                apiResponse = await client.SendAsync(message); 
+                apiResponse = await client.SendAsync(message);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                var APIResponse= JsonConvert.DeserializeObject<T>(apiContent);
+                try
+                {
+                    APIResponse ApiResponse = JsonConvert.DeserializeObject<APIResponse>(apiContent);
+                    if (apiResponse.StatusCode == HttpStatusCode.BadRequest || apiResponse.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        ApiResponse.StatusCode = HttpStatusCode.BadRequest;
+                        ApiResponse.IsSuccess = false;
+                        var res = JsonConvert.SerializeObject(ApiResponse);
+                        var returnObj = JsonConvert.DeserializeObject<T>(res);
+                        return returnObj;
+                    }
+                }
+                catch (Exception)
+                {
+                    var exceptionResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                    return exceptionResponse;
+                }
+                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
+                
+                
             }
             catch(Exception e)
             {

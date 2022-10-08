@@ -7,6 +7,7 @@ namespace Sales_Management_Web.Model.DTO
         public int Id { get; set; }
         [Required]
         public int DepartmentId { get; set; }
+        public DepartmentDTO Department { get; set; }
         public string Name { get; set; }
         public string PriceRange { get; set; }
         public string Description { get; set; }

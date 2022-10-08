@@ -11,6 +11,7 @@ namespace Sales_Management_API.Model.DTO
         public string PriceRange { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
-        
+        public DepartmentDTO Department { get; set; }
+
     }
 }

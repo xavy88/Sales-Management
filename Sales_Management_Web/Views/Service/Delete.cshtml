@@ -1,0 +1,51 @@
+﻿@model Sales_Management_Web.Models.VM.ServiceDeleteVM
+
+<form asp-action="Delete">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Delete</h1>
+        <hr />
+        <input hidden asp-for="Service.Id" />
+        <div class="row">
+            <div asp-validation-summary="All" class = "text-danger"></div>
+        
+         <div class="col-2">
+            <label asp-for="Service.Name" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Service.Name" disabled class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.DepartmentId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Service.DepartmentId" disabled class="form-select" asp-items="@Model.DepartmentList">
+                <option disabled selected>--Select Department</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.PriceRange" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Service.PriceRange" disabled class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.Description" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Service.Description" disabled class="form-control"></textarea>
+        </div>
+        <div class="col-5 offset-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+            
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Delete" class="btn btn-success form-control" />
+        </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

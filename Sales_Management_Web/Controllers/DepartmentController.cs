@@ -43,9 +43,11 @@ namespace Sales_Management_Web.Controllers
                 var response = await _departmentService.CreateAsync<APIResponse>(model);
                 if (response != null && response.IsSuccess)
                 {
+                    TempData["success"] = "Department created successfully";
                     return RedirectToAction(nameof(Index));
                 }
             }
+            TempData["error"] = "Something were wrong created the Department";
             return View(model);
         }
 
@@ -65,12 +67,15 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["success"] = "Department updated successfully";
                 var response = await _departmentService.UpdateAsync<APIResponse>(model);
                 if (response != null && response.IsSuccess)
                 {
+                    
                     return RedirectToAction(nameof(Index));
                 }
             }
+            TempData["error"] = "Something were wrong updating the Department";
             return View(model);
         }
 
@@ -92,9 +97,10 @@ namespace Sales_Management_Web.Controllers
                 var response = await _departmentService.DeleteAsync<APIResponse>(model.Id);
                 if (response != null && response.IsSuccess)
                 {
-                    return RedirectToAction(nameof(Index));
+                TempData["success"] = "Department deleted successfully";
+                return RedirectToAction(nameof(Index));
                 }
-            
+            TempData["error"] = "Something were wrong deleting the Department";
             return View(model);
         }
     }

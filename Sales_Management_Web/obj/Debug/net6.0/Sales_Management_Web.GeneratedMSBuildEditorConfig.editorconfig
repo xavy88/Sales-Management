@@ -39,8 +39,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Service/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Service/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Service/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Service/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/matri/Desktop/Net Core 2022/API/Sales Manager/Sales Management/Sales_Management_Web/Views/Shared/_ValidationScriptsPartial.cshtml]

@@ -9,7 +9,7 @@ namespace Sales_Management_Web.Model.DTO
         public int DepartmentId { get; set; }
         public string PriceRange { get; set; }
         public string Description { get; set; }
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
         public DateTime CreatedDate { get; set; }
 
     }

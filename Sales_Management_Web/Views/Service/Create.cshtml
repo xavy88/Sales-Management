@@ -1,0 +1,55 @@
+﻿@model Sales_Management_Web.Models.VM.ServiceCreateVM
+
+<form asp-action="Create">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Create</h1>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="All" class = "text-danger"></div>
+        
+         <div class="col-2">
+            <label asp-for="Service.Name" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Service.Name" class="form-control" />
+            <span asp-validation-for="Service.Name" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.DepartmentId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Service.DepartmentId" class="form-select" asp-items="@Model.DepartmentList">
+                <option disabled selected>--Select Department</option>
+            </select>
+            <span asp-validation-for="Service.DepartmentId" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.PriceRange" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Service.PriceRange" class="form-control" />
+            <span asp-validation-for="Service.PriceRange" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Service.Description" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Service.Description" class="form-control"></textarea>
+            <span asp-validation-for="Service.Description" class="text-danger"></span>
+        </div>
+        <div class="col-5 offset-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+            
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Create" class="btn btn-success form-control" />
+        </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

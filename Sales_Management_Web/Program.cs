@@ -12,6 +12,9 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddHttpClient<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
+builder.Services.AddHttpClient<IServicesService, ServicesService>();
+builder.Services.AddScoped<IServicesService, ServicesService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
