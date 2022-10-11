@@ -15,6 +15,15 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddHttpClient<IServicesService, ServicesService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 
+builder.Services.AddHttpClient<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+builder.Services.AddHttpClient<IClientService, ClientService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+
+builder.Services.AddHttpClient<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

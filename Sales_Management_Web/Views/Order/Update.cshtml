@@ -1,0 +1,94 @@
+﻿@model Sales_Management_Web.Models.VM.OrderUpdateVM
+
+<form asp-action="Update">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Update</h1>
+        <hr />
+        <input hidden asp-for="Order.Id" />
+        <div class="row">
+            <div asp-validation-summary="All" class = "text-danger"></div>
+        
+         <div class="col-2">
+            <label asp-for="Order.Reference" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Reference" class="form-control" />
+            <span asp-validation-for="Order.Reference" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.ClientId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.ClientId" class="form-select" asp-items="@Model.CompanyList">
+                <option disabled selected>--Select Client</option>
+            </select>
+            <span asp-validation-for="Order.ClientId" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="Order.EmployeeId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.EmployeeId" class="form-select" asp-items="@Model.EmployeeList">
+                <option disabled selected>--Select Closer</option>
+            </select>
+            <span asp-validation-for="Order.EmployeeId" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="Order.ServiceId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.ServiceId" class="form-select" asp-items="@Model.ServiceList">
+                <option disabled selected>--Select Service</option>
+            </select>
+            <span asp-validation-for="Order.ServiceId" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.StartDate" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input type="date" asp-for="Order.StartDate" class="form-control" />
+            <span asp-validation-for="Order.StartDate" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.EndDate" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input type="date" asp-for="Order.EndDate" class="form-control" />
+            <span asp-validation-for="Order.EndDate" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Duration" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Duration" class="form-control" />
+            <span asp-validation-for="Order.Duration" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Price" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Price" class="form-control" />
+            <span asp-validation-for="Order.Price" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Remark" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Order.Remark" class="form-control"></textarea>
+            <span asp-validation-for="Order.Remark" class="text-danger"></span>
+        </div>
+        <div class="col-5 offset-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+            
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Update" class="btn btn-success form-control" />
+        </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

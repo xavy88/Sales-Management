@@ -14,6 +14,15 @@ namespace Sales_Management_Web
             CreateMap<ServiceDTO, ServiceCreateDTO>().ReverseMap();
             CreateMap<ServiceDTO, ServiceUpdateDTO>().ReverseMap();
 
+            CreateMap<ClientDTO, ClientCreateDTO>().ReverseMap();
+            CreateMap<ClientDTO, ClientUpdateDTO>().ReverseMap();
+
+            CreateMap<EmployeeDTO, EmployeeCreateDTO>().ReverseMap();
+            CreateMap<EmployeeDTO, EmployeeUpdateDTO>().ReverseMap();
+
+            CreateMap<OrderDTO, OrderCreateDTO>().ReverseMap();
+            CreateMap<OrderDTO, OrderUpdateDTO>().ReverseMap();
+
         }
     }
 }

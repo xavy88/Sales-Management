@@ -1,0 +1,85 @@
+﻿@model Sales_Management_Web.Models.VM.OrderDeleteVM
+
+<form asp-action="Delete">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Delete</h1>
+        <hr />
+        <input hidden asp-for="Order.Id" />
+        <div class="row">
+            <div asp-validation-summary="All" class = "text-danger"></div>
+        
+         <div class="col-2">
+            <label asp-for="Order.Reference" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Reference" disabled class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.ClientId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.ClientId" disabled class="form-select" asp-items="@Model.CompanyList">
+                <option disabled selected>--Select Client</option>
+            </select>
+        </div>
+         <div class="col-2">
+            <label asp-for="Order.EmployeeId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.EmployeeId" disabled class="form-select" asp-items="@Model.EmployeeList">
+                <option disabled selected>--Select Closer</option>
+            </select>
+        </div>
+         <div class="col-2">
+            <label asp-for="Order.ServiceId" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="Order.ServiceId" disabled class="form-select" asp-items="@Model.ServiceList">
+                <option disabled selected>--Select Service</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.StartDate" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input type="date" disabled asp-for="Order.StartDate" class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.EndDate" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input type="date" disabled asp-for="Order.EndDate" class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Duration" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Duration" disabled class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Price" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Order.Price" disabled class="form-control" />
+        </div>
+        <div class="col-2">
+            <label asp-for="Order.Remark" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Order.Remark" disabled class="form-control"></textarea>
+        </div>
+        <div class="col-5 offset-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+            
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Delete" class="btn btn-success form-control" />
+        </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

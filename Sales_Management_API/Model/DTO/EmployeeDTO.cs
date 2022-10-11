@@ -9,6 +9,7 @@ namespace Sales_Management_API.Model.DTO
         public string Name { get; set; }
         [Required]
         public int DepartmentId { get; set; }
+        public DepartmentDTO Department { get; set; }
         public DateTime HiredDate { get; set; }
         public string Remark { get; set; }
         public string Phone { get; set; }

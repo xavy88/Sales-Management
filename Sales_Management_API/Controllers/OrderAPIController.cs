@@ -33,7 +33,7 @@ namespace Sales_Management_API.Controllers
         {
             try
             {
-                IEnumerable<Order> orderList = await _dbOrder.GetAllAsync();
+                IEnumerable<Order> orderList = await _dbOrder.GetAllAsync(includeProperties: "Employee,Client,Service");
                 _response.Result = _mapper.Map<List<OrderDTO>>(orderList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);

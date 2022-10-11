@@ -1,0 +1,73 @@
+﻿@model Sales_Management_Web.Model.DTO.ClientUpdateDTO
+<form asp-action="Update">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Update</h1>
+        <hr />
+         <input hidden asp-for="Id" />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class = "text-danger"></div>
+        
+        <div class="col-2">
+            <label asp-for="CompanyName" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="CompanyName" class="form-control" />
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="ContactName" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="ContactName" class="form-control" />
+            <span asp-validation-for="ContactName" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="Website" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Website" class="form-control" />
+            <span asp-validation-for="Website" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="Email" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+         <div class="col-2">
+            <label asp-for="Phone" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Address" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Address" class="form-control"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="Description" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="col-5 offset-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+            
+        </div>
+        <div class="col-5">
+            <input type="submit" value="Update" class="btn btn-success form-control" />
+        </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

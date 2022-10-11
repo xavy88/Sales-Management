@@ -55,12 +55,14 @@ namespace Sales_Management_Web.Controllers
                 var response = await _servicesService.CreateAsync<APIResponse>(model.Service);
                 if (response != null && response.IsSuccess)
                 {
+                    TempData["success"] = "Service created successfully";
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     if (response.ErrorMessages.Count>0)
                     {
+                        TempData["error"] = "Something were wrong created the Service";
                         ModelState.AddModelError("ErrorMessages", response.ErrorMessages.FirstOrDefault());
                     }
                 }
@@ -112,12 +114,14 @@ namespace Sales_Management_Web.Controllers
                 var response = await _servicesService.UpdateAsync<APIResponse>(model.Service);
                 if (response != null && response.IsSuccess)
                 {
+                    TempData["success"] = "Service updated successfully";
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     if (response.ErrorMessages.Count > 0)
                     {
+                        TempData["error"] = "Something were wrong updating the Service";
                         ModelState.AddModelError("ErrorMessages", response.ErrorMessages.FirstOrDefault());
                     }
                 }
