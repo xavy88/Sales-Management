@@ -15,51 +15,56 @@ namespace Sales_Management_Web.Services
             _clientFactory = clientFactory;
             clientUrl = configuration.GetValue<string>("ServiceUrls:Sales_Management_API");
         }
-        public Task<T> CreateAsync<T>(ClientCreateDTO dto)
+        public Task<T> CreateAsync<T>(ClientCreateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = clientUrl + "/api/ClientAPI"
+                Url = clientUrl + "/api/ClientAPI",
+                Token = token,
             });
         }
 
-        public Task<T> DeleteAsync<T>(int id)
+        public Task<T> DeleteAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = clientUrl + "/api/ClientAPI/"+id
+                Url = clientUrl + "/api/ClientAPI/"+id,
+                Token = token,
             });
         }
 
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = clientUrl + "/api/ClientAPI"
+                Url = clientUrl + "/api/ClientAPI",
+                Token = token,
             });
 
         }
 
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = clientUrl + "/api/ClientAPI/" + id
+                Url = clientUrl + "/api/ClientAPI/" + id,
+                Token = token,
             });
         }
 
-        public Task<T> UpdateAsync<T>(ClientUpdateDTO dto)
+        public Task<T> UpdateAsync<T>(ClientUpdateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = clientUrl + "/api/ClientAPI/" + dto.Id
+                Url = clientUrl + "/api/ClientAPI/" + dto.Id,
+                Token = token,
             });
         }
     }

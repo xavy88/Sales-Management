@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Model.DTO;
 using Sales_Management_Web.Models.VM;
@@ -28,7 +29,7 @@ namespace Sales_Management_Web.Controllers
         {
             List<OrderDTO> list = new();
 
-            var response = await _orderService.GetAllAsync<APIResponse>();
+            var response = await _orderService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<OrderDTO>>(Convert.ToString(response.Result));
@@ -38,9 +39,9 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Create()
         {
             OrderCreateVM orderVM = new();
-            var responseService = await _servicesService.GetAllAsync<APIResponse>();
-            var responseClient = await _clientService.GetAllAsync<APIResponse>();
-            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>();
+            var responseService = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseClient = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if ((responseService != null && responseService.IsSuccess) && (responseClient != null && responseClient.IsSuccess) && (responseEmployee != null && responseEmployee.IsSuccess))
             {
                 orderVM.ServiceList = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(responseService.Result)).Select(i => new SelectListItem
@@ -67,7 +68,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _orderService.CreateAsync<APIResponse>(model.Order);
+                var response = await _orderService.CreateAsync<APIResponse>(model.Order, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Order created successfully";
@@ -83,9 +84,9 @@ namespace Sales_Management_Web.Controllers
                 }
             }
 
-            var responseService = await _servicesService.GetAllAsync<APIResponse>();
-            var responseClient = await _clientService.GetAllAsync<APIResponse>();
-            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>();
+            var responseService = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseClient = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if ((responseService != null && responseService.IsSuccess) && (responseClient != null && responseClient.IsSuccess) && (responseEmployee != null && responseEmployee.IsSuccess))
             {
                 model.ServiceList = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(responseService.Result)).Select(i => new SelectListItem
@@ -112,16 +113,16 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Update(int id)
         {
             OrderUpdateVM orderVM = new();
-            var response = await _orderService.GetAsync<APIResponse>(id);
+            var response = await _orderService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 OrderDTO model = JsonConvert.DeserializeObject<OrderDTO>(Convert.ToString(response.Result));
                 orderVM.Order =  (_mapper.Map<OrderUpdateDTO>(model));
             }
 
-            var responseService = await _servicesService.GetAllAsync<APIResponse>();
-            var responseClient = await _clientService.GetAllAsync<APIResponse>();
-            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>();
+            var responseService = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseClient = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if ((responseService != null && responseService.IsSuccess) && (responseClient != null && responseClient.IsSuccess) && (responseEmployee != null && responseEmployee.IsSuccess))
             {
                 orderVM.ServiceList = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(responseService.Result)).Select(i => new SelectListItem
@@ -149,7 +150,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _orderService.UpdateAsync<APIResponse>(model.Order);
+                var response = await _orderService.UpdateAsync<APIResponse>(model.Order, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Order updated successfully";
@@ -166,9 +167,9 @@ namespace Sales_Management_Web.Controllers
             }
 
 
-            var responseService = await _servicesService.GetAllAsync<APIResponse>();
-            var responseClient = await _clientService.GetAllAsync<APIResponse>();
-            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>();
+            var responseService = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseClient = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if ((responseService != null && responseService.IsSuccess) && (responseClient != null && responseClient.IsSuccess) && (responseEmployee != null && responseEmployee.IsSuccess))
             {
                 model.ServiceList = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(responseService.Result)).Select(i => new SelectListItem
@@ -195,16 +196,16 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             OrderDeleteVM orderVM = new();
-            var response = await _orderService.GetAsync<APIResponse>(id);
+            var response = await _orderService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 OrderDTO model = JsonConvert.DeserializeObject<OrderDTO>(Convert.ToString(response.Result));
                 orderVM.Order = model;
             }
 
-            var responseService = await _servicesService.GetAllAsync<APIResponse>();
-            var responseClient = await _clientService.GetAllAsync<APIResponse>();
-            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>();
+            var responseService = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseClient = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var responseEmployee = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if ((responseService != null && responseService.IsSuccess) && (responseClient != null && responseClient.IsSuccess) && (responseEmployee != null && responseEmployee.IsSuccess))
             {
                 orderVM.ServiceList = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(responseService.Result)).Select(i => new SelectListItem
@@ -231,7 +232,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(OrderDeleteVM model)
         {
 
-            var response = await _orderService.DeleteAsync<APIResponse>(model.Order.Id);
+            var response = await _orderService.DeleteAsync<APIResponse>(model.Order.Id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Order deleted successfully";

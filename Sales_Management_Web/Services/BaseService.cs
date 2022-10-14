@@ -4,6 +4,7 @@ using Sales_Management_Web.Model;
 using Sales_Management_Web.Models;
 using Sales_Management_Web.Services.IServices;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Sales_Management_Web.Services
@@ -47,6 +48,11 @@ namespace Sales_Management_Web.Services
                         break;
                 }
                 HttpResponseMessage apiResponse = null;
+
+                if (!string.IsNullOrEmpty(apiRequest.Token))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
+                }
                 apiResponse = await client.SendAsync(message);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 try

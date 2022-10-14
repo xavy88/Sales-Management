@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Sales_Management_Web;
 using Sales_Management_Web.Services;
@@ -15,6 +16,8 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddHttpClient<IServicesService, ServicesService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddHttpClient<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
@@ -23,6 +26,26 @@ builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddHttpClient<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
+builder.Services.AddHttpClient<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    option =>
+    {
+        option.Cookie.HttpOnly = true;
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        option.LoginPath = "/Auth/Login";
+        option.AccessDeniedPath = "/Auth/AccessDenied";
+        option.SlidingExpiration = true;
+    });
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -38,9 +61,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

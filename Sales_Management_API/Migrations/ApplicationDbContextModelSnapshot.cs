@@ -139,6 +139,31 @@ namespace Sales_Management_API.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Sales_Management_API.Model.LocalUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LocalUsers");
+                });
+
             modelBuilder.Entity("Sales_Management_API.Model.Order", b =>
                 {
                     b.Property<int>("Id")

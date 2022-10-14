@@ -71,3 +71,4 @@ C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Ma
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_API\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\matri\Desktop\Net Core 2022\API\Sales Manager\Sales Management\Sales_Management_API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

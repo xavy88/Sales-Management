@@ -4,10 +4,10 @@ namespace Sales_Management_Web.Services.IServices
 {
     public interface IOrderService
     {
-        Task<T> GetAllAsync<T>();
-        Task<T> GetAsync<T>(int id);
-        Task<T> CreateAsync<T>(OrderCreateDTO dto);
-        Task<T> UpdateAsync<T>(OrderUpdateDTO dto);
-        Task<T> DeleteAsync<T>(int id);
+        Task<T> GetAllAsync<T>(string token);
+        Task<T> GetAsync<T>(int id, string token);
+        Task<T> CreateAsync<T>(OrderCreateDTO dto, string token);
+        Task<T> UpdateAsync<T>(OrderUpdateDTO dto, string token);
+        Task<T> DeleteAsync<T>(int id, string token);
     }
 }

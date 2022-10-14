@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Model.DTO;
 using Sales_Management_Web.Models.VM;
@@ -25,7 +26,7 @@ namespace Sales_Management_Web.Controllers
         {
             List<EmployeeDTO> list = new();
 
-            var response = await _employeeService.GetAllAsync<APIResponse>();
+            var response = await _employeeService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<EmployeeDTO>>(Convert.ToString(response.Result));
@@ -35,7 +36,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Create()
         {
             EmployeeCreateVM employeeVM = new();
-            var response = await _departmentService.GetAllAsync<APIResponse>();
+            var response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 employeeVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -52,7 +53,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _employeeService.CreateAsync<APIResponse>(model.Employee);
+                var response = await _employeeService.CreateAsync<APIResponse>(model.Employee, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Employee created successfully";
@@ -69,7 +70,7 @@ namespace Sales_Management_Web.Controllers
             }
 
            
-            var resp = await _departmentService.GetAllAsync<APIResponse>();
+            var resp = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (resp != null && resp.IsSuccess)
             {
                 model.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(resp.Result)).Select(i => new SelectListItem
@@ -86,14 +87,14 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Update(int id)
         {
             EmployeeUpdateVM employeeVM = new();
-            var response = await _employeeService.GetAsync<APIResponse>(id);
+            var response = await _employeeService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 EmployeeDTO model = JsonConvert.DeserializeObject<EmployeeDTO>(Convert.ToString(response.Result));
                 employeeVM.Employee =  (_mapper.Map<EmployeeUpdateDTO>(model));
             }
 
-            response = await _departmentService.GetAllAsync<APIResponse>();
+            response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 employeeVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -111,7 +112,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _employeeService.UpdateAsync<APIResponse>(model.Employee);
+                var response = await _employeeService.UpdateAsync<APIResponse>(model.Employee, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Employee updated successfully";
@@ -128,7 +129,7 @@ namespace Sales_Management_Web.Controllers
             }
 
 
-            var resp = await _departmentService.GetAllAsync<APIResponse>();
+            var resp = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (resp != null && resp.IsSuccess)
             {
                 model.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(resp.Result)).Select(i => new SelectListItem
@@ -145,14 +146,14 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             EmployeeDeleteVM employeeVM = new();
-            var response = await _employeeService.GetAsync<APIResponse>(id);
+            var response = await _employeeService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 EmployeeDTO model = JsonConvert.DeserializeObject<EmployeeDTO>(Convert.ToString(response.Result));
                 employeeVM.Employee = model;
             }
 
-            response = await _departmentService.GetAllAsync<APIResponse>();
+            response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 employeeVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -169,7 +170,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(EmployeeDeleteVM model)
         {
 
-            var response = await _employeeService.DeleteAsync<APIResponse>(model.Employee.Id);
+            var response = await _employeeService.DeleteAsync<APIResponse>(model.Employee.Id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Employee deleted successfully";

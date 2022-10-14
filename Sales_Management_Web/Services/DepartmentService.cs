@@ -15,51 +15,56 @@ namespace Sales_Management_Web.Services
             _clientFactory = clientFactory;
             departmentUrl = configuration.GetValue<string>("ServiceUrls:Sales_Management_API");
         }
-        public Task<T> CreateAsync<T>(DepartmentCreateDTO dto)
+        public Task<T> CreateAsync<T>(DepartmentCreateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = departmentUrl + "/api/DepartmentAPI"
+                Url = departmentUrl + "/api/DepartmentAPI",
+                Token = token,
             });
         }
 
-        public Task<T> DeleteAsync<T>(int id)
+        public Task<T> DeleteAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = departmentUrl + "/api/DepartmentAPI/"+id
+                Url = departmentUrl + "/api/DepartmentAPI/"+id,
+                Token = token,
             });
         }
 
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = departmentUrl + "/api/DepartmentAPI"
+                Url = departmentUrl + "/api/DepartmentAPI",
+                Token = token,
             });
 
         }
 
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = departmentUrl + "/api/DepartmentAPI/" + id
+                Url = departmentUrl + "/api/DepartmentAPI/" + id,
+                Token = token,
             });
         }
 
-        public Task<T> UpdateAsync<T>(DepartmentUpdateDTO dto)
+        public Task<T> UpdateAsync<T>(DepartmentUpdateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = departmentUrl + "/api/DepartmentAPI/" + dto.Id
+                Url = departmentUrl + "/api/DepartmentAPI/" + dto.Id,
+                Token = token,
             });
         }
     }

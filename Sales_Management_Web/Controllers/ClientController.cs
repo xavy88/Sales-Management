@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Model.DTO;
 using Sales_Management_Web.Services.IServices;
@@ -22,7 +23,7 @@ namespace Sales_Management_Web.Controllers
         {
             List<ClientDTO> list = new();
 
-            var response = await _clientService.GetAllAsync<APIResponse>();
+            var response = await _clientService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ClientDTO>>(Convert.ToString(response.Result));
@@ -40,7 +41,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _clientService.CreateAsync<APIResponse>(model);
+                var response = await _clientService.CreateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Client created successfully";
@@ -53,7 +54,7 @@ namespace Sales_Management_Web.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var response = await _clientService.GetAsync<APIResponse>(id);
+            var response = await _clientService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 ClientDTO model = JsonConvert.DeserializeObject<ClientDTO>(Convert.ToString(response.Result));
@@ -68,7 +69,7 @@ namespace Sales_Management_Web.Controllers
             if (ModelState.IsValid)
             {
                 TempData["success"] = "Client updated successfully";
-                var response = await _clientService.UpdateAsync<APIResponse>(model);
+                var response = await _clientService.UpdateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     
@@ -81,7 +82,7 @@ namespace Sales_Management_Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _clientService.GetAsync<APIResponse>(id);
+            var response = await _clientService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 ClientDTO model = JsonConvert.DeserializeObject<ClientDTO>(Convert.ToString(response.Result));
@@ -94,7 +95,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(ClientDTO model)
         {
             
-                var response = await _clientService.DeleteAsync<APIResponse>(model.Id);
+                var response = await _clientService.DeleteAsync<APIResponse>(model.Id, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                 TempData["success"] = "Client deleted successfully";

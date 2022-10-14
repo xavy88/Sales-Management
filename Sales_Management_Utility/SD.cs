@@ -16,5 +16,6 @@ namespace Sales_Management_Utility
             DELETE,
         }
 
+        public static string SessionToken = "JWTToken";
     }
 }

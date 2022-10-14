@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Model.DTO;
 using Sales_Management_Web.Models.VM;
@@ -25,7 +26,7 @@ namespace Sales_Management_Web.Controllers
         {
             List<ServiceDTO> list = new();
 
-            var response = await _servicesService.GetAllAsync<APIResponse>();
+            var response = await _servicesService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ServiceDTO>>(Convert.ToString(response.Result));
@@ -35,7 +36,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Create()
         {
             ServiceCreateVM serviceVM = new();
-            var response = await _departmentService.GetAllAsync<APIResponse>();
+            var response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 serviceVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -52,7 +53,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _servicesService.CreateAsync<APIResponse>(model.Service);
+                var response = await _servicesService.CreateAsync<APIResponse>(model.Service, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Service created successfully";
@@ -69,7 +70,7 @@ namespace Sales_Management_Web.Controllers
             }
 
            
-            var resp = await _departmentService.GetAllAsync<APIResponse>();
+            var resp = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (resp != null && resp.IsSuccess)
             {
                 model.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(resp.Result)).Select(i => new SelectListItem
@@ -86,14 +87,14 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Update(int id)
         {
             ServiceUpdateVM serviceVM = new();
-            var response = await _servicesService.GetAsync<APIResponse>(id);
+            var response = await _servicesService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 ServiceDTO model = JsonConvert.DeserializeObject<ServiceDTO>(Convert.ToString(response.Result));
                 serviceVM.Service =  (_mapper.Map<ServiceUpdateDTO>(model));
             }
 
-            response = await _departmentService.GetAllAsync<APIResponse>();
+            response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 serviceVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -111,7 +112,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _servicesService.UpdateAsync<APIResponse>(model.Service);
+                var response = await _servicesService.UpdateAsync<APIResponse>(model.Service, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Service updated successfully";
@@ -128,7 +129,7 @@ namespace Sales_Management_Web.Controllers
             }
 
 
-            var resp = await _departmentService.GetAllAsync<APIResponse>();
+            var resp = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (resp != null && resp.IsSuccess)
             {
                 model.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(resp.Result)).Select(i => new SelectListItem
@@ -145,14 +146,14 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             ServiceDeleteVM serviceVM = new();
-            var response = await _servicesService.GetAsync<APIResponse>(id);
+            var response = await _servicesService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 ServiceDTO model = JsonConvert.DeserializeObject<ServiceDTO>(Convert.ToString(response.Result));
                 serviceVM.Service = model;
             }
 
-            response = await _departmentService.GetAllAsync<APIResponse>();
+            response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 serviceVM.DepartmentList = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
@@ -169,7 +170,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(ServiceDeleteVM model)
         {
 
-            var response = await _servicesService.DeleteAsync<APIResponse>(model.Service.Id);
+            var response = await _servicesService.DeleteAsync<APIResponse>(model.Service.Id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(Index));

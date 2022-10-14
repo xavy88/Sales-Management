@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sales_Management_Utility;
 using Sales_Management_Web.Model;
 using Sales_Management_Web.Model.DTO;
 using Sales_Management_Web.Services.IServices;
@@ -22,7 +23,7 @@ namespace Sales_Management_Web.Controllers
         {
             List<DepartmentDTO> list = new();
 
-            var response = await _departmentService.GetAllAsync<APIResponse>();
+            var response = await _departmentService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<DepartmentDTO>>(Convert.ToString(response.Result));
@@ -40,7 +41,7 @@ namespace Sales_Management_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _departmentService.CreateAsync<APIResponse>(model);
+                var response = await _departmentService.CreateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     TempData["success"] = "Department created successfully";
@@ -53,7 +54,7 @@ namespace Sales_Management_Web.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var response = await _departmentService.GetAsync<APIResponse>(id);
+            var response = await _departmentService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 DepartmentDTO model = JsonConvert.DeserializeObject<DepartmentDTO>(Convert.ToString(response.Result));
@@ -68,7 +69,7 @@ namespace Sales_Management_Web.Controllers
             if (ModelState.IsValid)
             {
                 TempData["success"] = "Department updated successfully";
-                var response = await _departmentService.UpdateAsync<APIResponse>(model);
+                var response = await _departmentService.UpdateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     
@@ -81,7 +82,7 @@ namespace Sales_Management_Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _departmentService.GetAsync<APIResponse>(id);
+            var response = await _departmentService.GetAsync<APIResponse>(id, HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 DepartmentDTO model = JsonConvert.DeserializeObject<DepartmentDTO>(Convert.ToString(response.Result));
@@ -94,7 +95,7 @@ namespace Sales_Management_Web.Controllers
         public async Task<IActionResult> Delete(DepartmentDTO model)
         {
             
-                var response = await _departmentService.DeleteAsync<APIResponse>(model.Id);
+                var response = await _departmentService.DeleteAsync<APIResponse>(model.Id, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                 TempData["success"] = "Department deleted successfully";
