@@ -1,84 +1,112 @@
 ﻿@model Sales_Management_Web.Models.VM.OrderDeleteVM
 
-<form asp-action="Delete">
-    <br />
-    <div class="container border p-3">
-        <h1 class="text-primary">Delete</h1>
-        <hr />
-        <input hidden asp-for="Order.Id" />
-        <div class="row">
-            <div asp-validation-summary="All" class = "text-danger"></div>
-        
-         <div class="col-2">
-            <label asp-for="Order.Reference" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input asp-for="Order.Reference" disabled class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.ClientId" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <select asp-for="Order.ClientId" disabled class="form-select" asp-items="@Model.CompanyList">
-                <option disabled selected>--Select Client</option>
-            </select>
-        </div>
-         <div class="col-2">
-            <label asp-for="Order.EmployeeId" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <select asp-for="Order.EmployeeId" disabled class="form-select" asp-items="@Model.EmployeeList">
-                <option disabled selected>--Select Closer</option>
-            </select>
-        </div>
-         <div class="col-2">
-            <label asp-for="Order.ServiceId" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <select asp-for="Order.ServiceId" disabled class="form-select" asp-items="@Model.ServiceList">
-                <option disabled selected>--Select Service</option>
-            </select>
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.StartDate" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input type="date" disabled asp-for="Order.StartDate" class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.EndDate" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input type="date" disabled asp-for="Order.EndDate" class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.Duration" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input asp-for="Order.Duration" disabled class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.Price" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input asp-for="Order.Price" disabled class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Order.Remark" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <textarea asp-for="Order.Remark" disabled class="form-control"></textarea>
-        </div>
-        <div class="col-5 offset-2">
-            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
-            
-        </div>
-        <div class="col-5">
-            <input type="submit" value="Delete" class="btn btn-success form-control" />
-        </div>
+<style>
+    .card-registration .select-input.form-control {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    input.form-control, textarea.form-control-lg {
+        border-color: #ce8035;
+    }
+</style>
+
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+
+                        <div class="col-xl-6">
+                            <form asp-action="Delete">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-brand"><i class="bi bi-folder-x"></i> Delete</h3>
+                                    <input hidden asp-for="Order.Id" />
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <input disabled autofocus asp-for="Order.Reference" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <label asp-for="Order.Reference" class="form-label" for="form3Example1m">Reference</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <input disabled asp-for="Order.Duration" type="text" id="form3Example1n" class="form-control form-control-lg" />
+                                                <label asp-for="Order.Duration" class="form-label" for="form3Example1n">Duration</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label asp-for="Order.ClientId" class="form-label">Client</label>
+                                        <select disabled asp-for="Order.ClientId" class="form-select" asp-items="@Model.CompanyList">
+                                            <option disabled selected>--Select a Client</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                      <label asp-for="Order.EmployeeId" class="form-label">Employee</label>
+                                      <select disabled asp-for="Order.EmployeeId" class="form-select" asp-items="@Model.EmployeeList">
+                                          <option disabled selected>--Select a Employee</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-outline mb-4">
+                                    <label asp-for="Order.ServiceId" class="form-label">Service</label>
+                                    <select disabled asp-for="Order.ServiceId" class="form-select" asp-items="@Model.ServiceList">
+                                        <option disabled selected>--Select a Service</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                  <div asp-validation-summary="All" class="text-danger"></div>
+                                  <div class="col-md-6 mb-4">
+                                      <div class="form-outline">
+                                          <input disabled asp-for="Order.StartDate" type="date" id="form3Example1m" class="form-control form-control-lg" />
+                                          <label asp-for="Order.StartDate" class="form-label" for="form3Example1m">Start Date</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4">
+                                      <div class="form-outline">
+                                          <input disabled asp-for="Order.EndDate" type="date" id="form3Example1n" class="form-control form-control-lg" />
+                                          <label asp-for="Order.EndDate" class="form-label" for="form3Example1n">End Date</label>
+                                      </div>
+                                  </div>
+                              </div>
+                                    <div class="form-outline mb-4">
+                                      <input disabled asp-for="Order.Price" type="text" id="form3Example1n" class="form-control form-control-lg" />
+                                      <label asp-for="Order.Price" class="form-label" for="form3Example1n">Price</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                      <textarea disabled asp-for="Order.Remark" type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
+                                      <label asp-for="Order.Remark" class="form-label" for="form3Example8">Remark</label>
+                                  </div>
+
+                                    <div class="row">
+                                    </div>
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                                        <button type="submit" class="btn btn-danger btn-lg ms-2 form-control"><i class="bi bi-folder-x"></i> Delete</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</form>
+</section>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />

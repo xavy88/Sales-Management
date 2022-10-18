@@ -1,50 +1,85 @@
 ﻿@model Sales_Management_Web.Models.VM.ServiceDeleteVM
 
-<form asp-action="Delete">
-    <br />
-    <div class="container border p-3">
-        <h1 class="text-primary">Delete</h1>
-        <hr />
-        <input hidden asp-for="Service.Id" />
-        <div class="row">
-            <div asp-validation-summary="All" class = "text-danger"></div>
-        
-         <div class="col-2">
-            <label asp-for="Service.Name" class="control-label pt-2" style="font-size:20px;"></label>
+<style>
+    .card-registration .select-input.form-control {
+font-size: 1rem;
+line-height: 2.15;
+padding-left: .75em;
+padding-right: .75em;
+}
+.card-registration .select-arrow {
+top: 13px;
+}   
+
+input.form-control,textarea.form-control-lg {
+    border-color: #ce8035;
+   }
+</style>
+
+<section class="h-100 bg-dark">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+            </div>
+           
+            <div class="col-xl-6">
+                 <form asp-action="Delete">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase text-brand"><i class="bi bi-folder-x"></i> Delete</h3>
+                <input hidden asp-for="Service.Id" />
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input autofocus asp-for="Service.Name" disabled type="text" id="form3Example1m" class="form-control form-control-lg" />
+                      <label asp-for="Service.Name" class="form-label" for="form3Example1m">Service</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input asp-for="Service.PriceRange" disabled type="text" id="form3Example1n" class="form-control form-control-lg" />
+                      <label asp-for="Service.PriceRange" class="form-label" for="form3Example1n">Price Range</label>
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-outline mb-4">
+                       <label asp-for="Service.DepartmentId" class="form-label">Department</label>
+                       <select asp-for="Service.DepartmentId" disabled class="form-select" asp-items="@Model.DepartmentList">
+                        <option disabled selected>--Select Department</option>
+                    </select>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <textarea asp-for="Service.Description" disabled type="text" id="form3Example8" class="form-control form-control-lg"></textarea>
+                  <span asp-validation-for="Service.Description" class="text-danger"></span>
+                    </div>
+
+
+                <div class="row">
+                  
+                 
+                </div>
+                <div class="d-flex justify-content-end pt-3">
+                     <a asp-action="Index" class="btn btn-secondary form-control btn-lg"><i class="bi bi-arrow-return-left"></i> Back to list</a>
+                  <button type="submit" class="btn btn-danger btn-lg ms-2 form-control"><i class="bi bi-folder-x"></i> Delete</button>
+                   
+                </div>
+
+              </div>
+                </form>
+            </div>
+          
+          </div>
         </div>
-        <div class="col-10 pb-3">
-            <input asp-for="Service.Name" disabled class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Service.DepartmentId" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <select asp-for="Service.DepartmentId" disabled class="form-select" asp-items="@Model.DepartmentList">
-                <option disabled selected>--Select Department</option>
-            </select>
-        </div>
-        <div class="col-2">
-            <label asp-for="Service.PriceRange" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <input asp-for="Service.PriceRange" disabled class="form-control" />
-        </div>
-        <div class="col-2">
-            <label asp-for="Service.Description" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pb-3">
-            <textarea asp-for="Service.Description" disabled class="form-control"></textarea>
-        </div>
-        <div class="col-5 offset-2">
-            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
-            
-        </div>
-        <div class="col-5">
-            <input type="submit" value="Delete" class="btn btn-success form-control" />
-        </div>
-        </div>
+      </div>
     </div>
-</form>
+  </div>
+</section>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />

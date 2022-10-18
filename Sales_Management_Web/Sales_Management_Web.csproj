@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Sales_Management_Utility\Sales_Management_Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
