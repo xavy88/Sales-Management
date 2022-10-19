@@ -57,7 +57,13 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                <li class="nav-item">
+         
+            </ul>
+            @if(httpAcc.HttpContext.Session.GetString(SD.SessionToken)!= null &&
+            httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length>0)
+            {
+                <ul class="navbar-nav ms-auto">
+                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Department" asp-action="Index">Departments</a>
                 </li>
                 <li class="nav-item">
@@ -72,11 +78,8 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Order" asp-action="Index">Order</a>
                 </li>
-            </ul>
-            @if(httpAcc.HttpContext.Session.GetString(SD.SessionToken)!= null &&
-            httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length>0)
-            {
             <a asp-controller="Auth" asp-action="Logout" class="btn btn-brand ms-lg-3"><i class="bi bi-box-arrow-left"></i> Logout</a>
+             </ul>
             }
             else
             {

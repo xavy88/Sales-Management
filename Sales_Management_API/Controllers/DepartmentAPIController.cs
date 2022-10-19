@@ -13,6 +13,7 @@ namespace Sales_Management_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class DepartmentAPIController : ControllerBase
     {
         protected APIResponse _response;
